@@ -1,1 +1,50 @@
-/* You can add global styles to this file, and also import other style files */
+@use "@angular/material" as mat;
+@use "./assets/m3-theme.scss";
+
+@include mat.core();
+
+mat.$theme-ignore-duplication-warnings: true;
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+
+  @include mat.all-component-themes(m3-theme.$dark-theme);
+
+  .mat-secondary {  
+    @include mat.button-color(m3-theme.$dark-theme,$color-variant: secondary);
+  }
+  .mat-tertiary {
+    @include mat.button-color(m3-theme.$dark-theme, $color-variant: tertiary);
+  }
+  .mat-error {
+    @include mat.button-color(m3-theme.$dark-theme, $color-variant: error);
+  }
+
+  .light-mode {
+    @include mat.all-component-themes(m3-theme.$light-theme);
+
+    .mat-secondary {
+      @include mat.button-color(m3-theme.$light-theme,$color-variant: secondary);
+    }
+    .mat-tertiary {
+      @include mat.button-color(m3-theme.$light-theme,$color-variant: tertiary);
+    }
+    .mat-error {
+      @include mat.button-color(m3-theme.$light-theme, $color-variant: error);
+    }
+  }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Guides:wght@400..700&family=Pacifico&display=swap');
+.title-font {
+    font-family: "Pacifico", cursive;
+    font-weight: 400;
+    font-style: normal;
+    font-size: xx-large;
+}
+

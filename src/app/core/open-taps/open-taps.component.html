@@ -1,0 +1,23 @@
+<div class="tap-list">
+        @for(customer of customers$ | async; track $index)  {
+            <mat-card appearance="outlined" class="card">
+                <div class="avatar-and-buttons">
+                    <div class="avatar" >
+                        <img mat-card-md-image [src]="customer.avatar ?customer.avatar : '/assets/images/avatar-man.png'" >
+                    </div>
+                    <button mat-fab class="mat-error" >
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+                <mat-card-header>
+                    <div>
+                        <mat-card-title>Name: <b>{{customer.firstName}} {{customer.lastName}}</b></mat-card-title>
+                        <mat-card-subtitle>Table: <b>{{customer.table}}</b></mat-card-subtitle>
+                    </div>
+                </mat-card-header>
+                <mat-card-actions class="action-buttons">
+                    <button mat-flat-button>Charge</button>
+                </mat-card-actions>
+            </mat-card>
+        }
+</div>

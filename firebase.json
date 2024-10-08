@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "site": "onthetap-1a7d9",
+    "public": "public/browser",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
