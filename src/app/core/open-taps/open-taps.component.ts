@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatCardModule} from '@angular/material/card';
 import {MatChipsModule} from '@angular/material/chips';
@@ -6,15 +6,10 @@ import { Observable, of } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { CustomerModel } from '../interfaces/customer.model';
+import { MatDialog } from '@angular/material/dialog';
+import { ChargingDialogComponent } from './charging-dialog/charging-dialog.component';
 
-interface CustomerModel {
-  id:number,
-  firstName:string
-  lastName:string
-  table:number,
-  avatar?: string,
-
-}
 @Component({
   selector: 'app-open-taps',
   standalone: true,
@@ -31,6 +26,19 @@ interface CustomerModel {
   styleUrl: './open-taps.component.scss'
 })
 export class OpenTapsComponent {
+
+  dialog = inject(MatDialog);
+
+  chargeCustomer(customer:CustomerModel) {
+    this.dialog.open(ChargingDialogComponent, {
+      data: {
+        customer: customer,
+      },
+      hasBackdrop: true,
+      disableClose:true,
+      backdropClass: "backDropClass",
+    });
+  }
 customers$: Observable<CustomerModel[]> = of([
   {
     id: 1,

@@ -1,0 +1,19 @@
+<div class="dialog-container">
+    @if(customer$|async; as selectedCustomer ) {
+        <h3 mat-dialog-title>Charge {{selectedCustomer.firstName}} {{selectedCustomer.lastName}}</h3>
+        <mat-dialog-content class="content">
+            <mat-form-field>
+                <mat-label>Value to charge</mat-label>
+                <input matInput type="number" step="0.01" [(ngModel)]="valueToCharge">
+                @if (valueToCharge) {
+                  <button matSuffix mat-icon-button aria-label="Clear" (click)="valueToCharge=null">
+                    <mat-icon>close</mat-icon>
+                  </button>
+                }
+              </mat-form-field>
+              <button mat-flat-button (click)="generateQrCode()">Generate QrCode</button>
+              <button mat-flat-button class="mat-error">Cancel</button>
+              <qrcode [qrdata]="qrCodeString"></qrcode>
+        </mat-dialog-content>
+    }
+</div>

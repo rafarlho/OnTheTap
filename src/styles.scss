@@ -25,6 +25,7 @@ body {
     @include mat.button-color(m3-theme.$dark-theme, $color-variant: error);
   }
 
+
   .light-mode {
     @include mat.all-component-themes(m3-theme.$light-theme);
 
@@ -48,3 +49,6 @@ body {
     font-size: xx-large;
 }
 
+.backDropClass {
+  backdrop-filter: blur(100px);
+}
