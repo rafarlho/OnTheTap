@@ -15,6 +15,11 @@
                         <mat-card-subtitle>Table: <b>{{customer.table}}</b></mat-card-subtitle>
                     </div>
                 </mat-card-header>
+                @if(customer.owes) {
+                    <mat-card-content>
+                        <p>Current tap: <b>{{customer.owes}}€</b></p>
+                    </mat-card-content>
+                }
                 <mat-card-actions class="action-buttons">
                     <button mat-flat-button (click)="chargeCustomer(customer)">Charge</button>
                 </mat-card-actions>

@@ -2,7 +2,13 @@
     @if(customer$|async; as selectedCustomer ) {
         <h3 mat-dialog-title>Charge {{selectedCustomer.firstName}} {{selectedCustomer.lastName}}</h3>
         <mat-dialog-content class="content">
-            <mat-form-field>
+            @if(enableQrCode) {
+              <p>Value to charge: {{valueToCharge}}€</p>
+              <qrcode [qrdata]="qrCodeString"></qrcode>
+              <button mat-flat-button (click)="enableQrCode = false">Change value</button>
+              <button mat-flat-button class="mat-error" [mat-dialog-close]="true" cdkFocusInitial>Cancel</button>
+            } @else {
+              <mat-form-field>
                 <mat-label>Value to charge</mat-label>
                 <input matInput type="number" step="0.01" [(ngModel)]="valueToCharge">
                 @if (valueToCharge) {
@@ -11,9 +17,9 @@
                   </button>
                 }
               </mat-form-field>
-              <button mat-flat-button (click)="generateQrCode()">Generate QrCode</button>
-              <button mat-flat-button class="mat-error">Cancel</button>
-              <qrcode [qrdata]="qrCodeString"></qrcode>
+              <button mat-flat-button (click)="generateQrCode(customer.customer.id)">Generate QrCode</button>
+              <button mat-flat-button class="mat-error" [mat-dialog-close]="true" cdkFocusInitial>Cancel</button>
+            }
         </mat-dialog-content>
     }
 </div>

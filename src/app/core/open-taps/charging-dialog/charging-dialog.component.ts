@@ -3,6 +3,7 @@ import {
   MAT_DIALOG_DATA,
   MatDialogTitle,
   MatDialogContent,
+  MatDialogModule,
 } from '@angular/material/dialog';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { CustomerModel } from '../../interfaces/customer.model';
@@ -25,7 +26,9 @@ import { QRCodeModule } from 'angularx-qrcode';
     MatInputModule, 
     FormsModule, 
     MatButtonModule, 
-    MatIconModule,QRCodeModule
+    MatIconModule,
+    QRCodeModule,
+    MatDialogModule,
   ],
   templateUrl: './charging-dialog.component.html',
   styleUrl: './charging-dialog.component.scss'
@@ -34,18 +37,18 @@ export class ChargingDialogComponent {
   customer = inject(MAT_DIALOG_DATA);
   customer$ = new BehaviorSubject<CustomerModel|null>(null)
   valueToCharge:number|null = null
+  enableQrCode = false
 
 
-  qrCodeString : string = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+  qrCodeString !: string //= 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
   constructor() {
     this.customer$.next(this.customer.customer)
   }
 
-  generateQrCode() {
-
-  }
-
-  closeDialog() {
-    
+  generateQrCode(id:number) {
+    if(this.valueToCharge && this.valueToCharge>0) {
+      this.qrCodeString = "customerId:"+id +';value:'+this.valueToCharge
+      this.enableQrCode = true
+    }
   }
 }
